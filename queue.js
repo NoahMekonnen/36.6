@@ -21,13 +21,15 @@ class Queue {
 
   enqueue(val) {
     let node = new Node(val)
-    if (!this.first){
+    if (!this.first) {
       this.first = node
       this.last = node
+      this.size = 1
     }
-    else{
+    else {
       this.last.next = node
       this.last = node
+      this.size += 1
     }
     return undefined
   }
@@ -36,14 +38,13 @@ class Queue {
    * and return its value. Should throw an error if the queue is empty. */
 
   dequeue() {
-    try {
-      let val = this.first.val
-      this.first = this.first.next
-      return val
+    if (!this.first) {
+      throw new Error("No node to delete")
     }
-    catch(err){
-      return err
-    }
+    let val = this.first.val
+    this.first = this.first.next
+    this.size -= 1
+    return val
   }
 
   /** peek(): return the value of the first node in the queue. */
@@ -55,7 +56,7 @@ class Queue {
   /** isEmpty(): return true if the queue is empty, otherwise false */
 
   isEmpty() {
-    if (this.first){
+    if (this.first) {
       return false
     }
     return true

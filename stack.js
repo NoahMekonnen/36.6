@@ -24,11 +24,14 @@ class Stack {
     if (!this.first){
       this.first = node
       this.last = node
+      this.size = 1
     }
     else{
       this.last.next = node
       this.last = node
+      this.size += 1
     }
+    return undefined
   }
 
   /** pop(): remove the node from the top of the stack
@@ -37,17 +40,25 @@ class Stack {
   pop() {
     try {
       let node = this.first
+      if (!node.next){
+        this.first = null
+        this.last = null
+        this.size = 0
+      }
+      else{
       while (node.next.next){
         node = node.next
       }
       let val = node.next.val 
       node.next = null
       this.last = node
+      this.size -=1
       return val
     }
-    catch{
-      return err
   }
+    catch{
+      throw new Error("No node to remove")
+    }
 }
 
   /** peek(): return the value of the first node in the stack. */
