@@ -27,8 +27,8 @@ class Stack {
       this.size = 1
     }
     else{
-      this.last.next = node
-      this.last = node
+      this.first.next = node
+      this.first = node
       this.size += 1
     }
     return undefined
@@ -39,7 +39,7 @@ class Stack {
 
   pop() {
     try {
-      let node = this.first
+      let node = this.last
       if (!node.next){
         this.first = null
         this.last = null
@@ -51,7 +51,7 @@ class Stack {
       }
       let val = node.next.val 
       node.next = null
-      this.last = node
+      this.first = node
       this.size -=1
       return val
     }
@@ -64,13 +64,13 @@ class Stack {
   /** peek(): return the value of the first node in the stack. */
 
   peek() {
-    return this.last.val
+    return this.first.val
   }
 
   /** isEmpty(): return true if the stack is empty, otherwise false */
 
   isEmpty() {
-    if (this.first){
+    if (this.last){
       return false
     }
     return true
